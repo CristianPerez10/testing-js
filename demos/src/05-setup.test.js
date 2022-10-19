@@ -1,18 +1,18 @@
 describe('Set', () => {
   beforeAll(() => {
-    console.log('before 1');
+    // console.log('before 1');
   });
 
   beforeEach(() => {
-    console.log('before each');
+    // console.log('before each');
   });
 
   afterAll(() => {
-    console.log('after 1');
+    // console.log('after 1');
   });
 
   afterEach(() => {
-    console.log('after each');
+    // console.log('after each');
   });
 
   test('case 1', () => {
@@ -25,7 +25,7 @@ describe('Set', () => {
 
   describe('other set', () => {
     beforeAll(() => {
-      console.log('before 2');
+      // console.log('before 2');
     });
 
     test('case 3', () => {
