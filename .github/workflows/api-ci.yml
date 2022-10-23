@@ -6,6 +6,7 @@ name: API CI
 # Configuracion para monorepos
 on:
   push:
+    paths:
       - "./api/**".
       - ".github/worflows/api-ci.yml".
 
