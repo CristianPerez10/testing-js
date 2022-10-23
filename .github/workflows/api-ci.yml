@@ -38,3 +38,53 @@ jobs:
       - name: run lint test
         shell: bash
         run: npm run lint
+
+  linter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Nodejs
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.13
+          cache: npm
+          cache-dependency-path: ./api/package-lock.json
+
+      - name: install
+        shell: bash
+        run: npm ci
+
+      - name: run lint test
+        shell: bash
+        run: npm run lint
+
+  e2e:
+    runs-on: ubuntu-latest
+    container:
+      image: node:16
+
+    service:
+      mongo-e2e:
+        image: mongo:4.4
+        env:
+          MONGO_INITDB_ROOT_USERNAME: test
+          MONGO_INITDB_ROOT_PASSWORD: test123
+        ports:
+          - 27017:27017
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: install
+        shell: bash
+        run: npm ci
+
+      - name: run e2e test
+        shell: bash
+        run: npm run test:e2e
+        env:
+          MONGO_DB_NAME: demo
+          MONGO_URL: mongodb://test:test123@localhost:27017?retryWrites=true&writeConcern=majority
